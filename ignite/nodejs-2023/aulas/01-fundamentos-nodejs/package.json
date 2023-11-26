@@ -6,6 +6,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch src/server.js",
+    "stream:server": "node --watch streams/stream-http-server.js",
+    "stream:fake": "node --watch streams/fake-upload-to-http-stream.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
