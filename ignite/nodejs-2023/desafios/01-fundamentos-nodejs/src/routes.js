@@ -25,4 +25,17 @@ export const routes = [
       return res.writeHead(201).end();
     }
   },
+  {
+    method: 'GET',
+    path: buildeRoutePath('/tasks'),
+    handler: (req, res) => {
+      const { search } = req.query;
+      const tasks = database.select('tasks', search ? {
+        title: search,
+        description: search
+      } : null);
+
+      return res.end(JSON.stringify(tasks));
+    }
+  },
 ]
