@@ -65,4 +65,23 @@ export const routes = [
       return res.writeHead(204).end();
     }
   },
+  {
+    method: 'PATCH',
+    path: buildeRoutePath('/tasks/:id/complete'),
+    handler: (req, res) => {
+      const { id } = req.params;
+      const [task] = database.select('tasks', { id });
+
+      if (!task) {
+        return res.writeHead(404).end()
+      }
+
+      const isCompleted = !!task.completed_at;
+      const completed_at = isCompleted ? null : new Date();
+
+      database.update('tasks', id, { ...task,  completed_at })
+
+      return res.writeHead(204).end()
+    }
+  },
 ]
